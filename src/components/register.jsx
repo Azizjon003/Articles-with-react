@@ -1,10 +1,39 @@
 import { Input } from "../ui";
 import { icon } from "../contstants/index.js";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  RegisterUserFailure,
+  RegisterUserStart,
+  RegisterUserSuccess,
+  signUserFailure,
+  signUserStart,
+  signUserSuccess,
+} from "../slice/auth.js";
+import AuthService from "../service/auth.js";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
+  const { isLoading } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    dispatch(signUserStart());
+    const user = {
+      username,
+      email,
+      password,
+    };
+    try {
+      const res = await AuthService.userRegister(user);
+      console.log(res);
+      dispatch(signUserSuccess(res.user));
+    } catch (err) {
+      console.log(err);
+      dispatch(signUserFailure(err.response.data.errors));
+    }
+  };
   return (
     <div className="text-center">
       <main className="form-signin w-25 m-auto">
@@ -36,7 +65,11 @@ function Register() {
           />
 
           <div className="form-check text-start my-3"></div>
-          <button className="btn btn-primary w-100 py-2" type="submit">
+          <button
+            className="btn btn-primary w-100 py-2"
+            type="submit"
+            onClick={submitHandler}
+          >
             Register
           </button>
         </form>
