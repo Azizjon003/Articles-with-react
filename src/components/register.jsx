@@ -1,6 +1,6 @@
 import { Input } from "../ui";
 import { icon } from "../contstants/index.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signUserFailure,
@@ -9,11 +9,17 @@ import {
 } from "../slice/auth.js";
 import AuthService from "../service/auth.js";
 import ValidationError from "./validation-error.js";
+import { useNavigate } from "react-router";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
-  const { isLoading } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const { isLogged } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isLogged) navigate("/");
+  }, [isLogged]);
   const dispatch = useDispatch();
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -27,6 +33,7 @@ function Register() {
       const res = await AuthService.userRegister(user);
       console.log(res);
       dispatch(signUserSuccess(res.user));
+      navigate("/");
     } catch (err) {
       console.log(err);
       dispatch(signUserFailure(err.response.data.errors));
