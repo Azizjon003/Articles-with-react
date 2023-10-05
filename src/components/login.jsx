@@ -8,6 +8,7 @@ import {
   signUserSuccess,
 } from "../slice/auth.js";
 import AuthService from "../service/auth.js";
+import ValidationError from "./validation-error.js";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -35,6 +36,7 @@ function Login() {
         <form className="">
           <img className="mb-4" src={icon} alt="" width="100" height="60" />
           <h1 className="h3 mb-3 fw-normal">Please Login</h1>
+          <ValidationError />
 
           <Input
             type={"text"}

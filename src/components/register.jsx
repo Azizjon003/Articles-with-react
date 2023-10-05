@@ -3,14 +3,12 @@ import { icon } from "../contstants/index.js";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  RegisterUserFailure,
-  RegisterUserStart,
-  RegisterUserSuccess,
   signUserFailure,
   signUserStart,
   signUserSuccess,
 } from "../slice/auth.js";
 import AuthService from "../service/auth.js";
+import ValidationError from "./validation-error.js";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,6 +38,7 @@ function Register() {
         <form className="">
           <img className="mb-4" src={icon} alt="" width="100" height="60" />
           <h1 className="h3 mb-3 fw-normal">Please Register</h1>
+          <ValidationError />
 
           <Input
             type={"email"}
