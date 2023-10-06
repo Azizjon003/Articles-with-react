@@ -31,7 +31,7 @@ function Register() {
     };
     try {
       const res = await AuthService.userRegister(user);
-      console.log(res);
+      // console.log(res);
       dispatch(signUserSuccess(res.user));
       navigate("/");
     } catch (err) {

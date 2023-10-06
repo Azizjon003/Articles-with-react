@@ -30,7 +30,7 @@ function Login() {
     };
     try {
       const data = await AuthService.userLogin(user);
-      console.log(data);
+      // console.log(data);
       dispatch(signUserSuccess(data.user));
       navigate("/");
     } catch (err) {

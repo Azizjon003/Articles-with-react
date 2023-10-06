@@ -6,21 +6,25 @@ import AuthService from "./service/auth.js";
 import { useDispatch } from "react-redux";
 import { signUserSuccess } from "./slice/auth.js";
 import { getItem } from "./helpers/persistanse-storage.js";
+import ArticleService from "./service/articles.js";
+import { getArticlesArticlesSucces } from "./slice/articles.js";
 function App() {
   const dispatch = useDispatch();
 
   const getUser = async () => {
     try {
       const response = await AuthService.getUser();
-      console.log(response);
+
       dispatch(signUserSuccess(response.user));
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     console.log("App.js useEffect");
     const token = getItem("token");
+
     if (token) getUser();
   }, []);
   return (
