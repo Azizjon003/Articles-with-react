@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Login, Main, Navbar, Register } from "./components";
+import { ArticleDetails, Login, Main, Navbar, Register } from "./components";
 import AuthService from "./service/auth.js";
 import { useDispatch } from "react-redux";
 import { signUserSuccess } from "./slice/auth.js";
@@ -28,12 +28,13 @@ function App() {
     if (token) getUser();
   }, []);
   return (
-    <div>
+    <div className="container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/article-detail/:id" element={<ArticleDetails />} />
       </Routes>
     </div>
   );

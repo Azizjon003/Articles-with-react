@@ -6,8 +6,10 @@ import {
 } from "../slice/articles.js";
 import ArticleService from "../service/articles.js";
 import Loader from "../ui/loader.jsx";
+import { useNavigate } from "react-router";
 
 function Main() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const getArticles = async () => {
     try {
@@ -26,7 +28,7 @@ function Main() {
   console.log(articles);
 
   return (
-    <div className="container">
+    <div>
       {isLoading && <Loader />}
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {articles.map((item, index) => {
@@ -55,6 +57,7 @@ function Main() {
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
                       <button
+                        onClick={() => navigate(`article-detail/${item.slug}`)}
                         type="button"
                         className="btn btn-sm btn-outline-success"
                       >
