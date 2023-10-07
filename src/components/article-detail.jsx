@@ -3,11 +3,7 @@ import { useParams } from "react-router";
 import ArticleService from "../service/articles.js";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getArticleStart,
-  getArticleSucces,
-  getArticlesStart,
-} from "../slice/articles.js";
+import { getArticleStart, getArticleSucces } from "../slice/articles.js";
 import Loader from "../ui/loader.jsx";
 
 const ArticleDetails = () => {
