@@ -27,6 +27,11 @@ function Navbar() {
               <p className="m-0 py-2 text-dark text-decoration-none">
                 {user.username}
               </p>
+              <Link to={"/create-article"}>
+                <button className="btn btn-outline-primary" type="submit">
+                  Create Article
+                </button>
+              </Link>
               <button
                 className="btn btn-outline-danger"
                 type="submit"

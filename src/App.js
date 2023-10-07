@@ -8,6 +8,7 @@ import { signUserSuccess } from "./slice/auth.js";
 import { getItem } from "./helpers/persistanse-storage.js";
 import ArticleService from "./service/articles.js";
 import { getArticlesArticlesSucces } from "./slice/articles.js";
+import { CreateArticle } from "./components/create-article.jsx";
 function App() {
   const dispatch = useDispatch();
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/article-detail/:id" element={<ArticleDetails />} />
+        <Route path="/create-article" element={<CreateArticle />} />
       </Routes>
     </div>
   );
